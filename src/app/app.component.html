@@ -1,0 +1,241 @@
+<form [formGroup]="registerForm">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="card pt-4">
+          <h6 class="text-light">Designation: </h6>
+          <div class="text-light"><hr color="#fffff"  style="padding-top: 1px; margin-top: -1px"></div>
+           
+              <div class="row">
+                
+                <div class="col-md-8">
+                  <div class="row g-3">
+              
+                    <div class="col-md-2">
+                      <label for="role" class="col-form-label">Role<span class=text-danger>*</span> </label>
+                    </div>
+                    <div class="col-md-4 ">
+                      <select class="form-control" formControlName="role">
+                        <option ngValue="" selected disabled hidden>Choose your role</option>
+                        <option *ngFor="let r of roles" [ngValue]="r">
+                            {{r}}
+                        </option></select>
+                          <span class="text-danger" *ngIf="role && role.invalid && role.touched">choose your role</span> 
+                    </div>
+                  
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <h2>Registration Form</h2>
+                </div>
+              </div>
+         
+          <h6 class="text-light">Personal details: </h6>
+          <div class="text-light"><hr color="#fffff"  style="padding-top: 1px; margin-top: -1px"></div>
+          
+          <!-- <div class="card-body"> -->
+
+            
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Firstname <span class=text-danger>*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Firstname" formControlName="firstname" >
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Lastname <span class=text-danger>*</span></label>
+                  <input type="text" class="form-control" [class.is-invalid]="registerForm.get('lastname')?.invalid && registerForm.get('lastname')?.touched" placeholder="Enter Lastname" id="" name="" formControlName="lastname">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Date of birth <span class=text-danger>*</span></label>
+                  <input type="date" class="form-control" id="" [(ngModel)]="birthdate"  
+                   (change)="calculateAge()" name="birthdate" formControlName="birthdate">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Age <span class=text-danger>*</span></label>
+                  <input formControlName="age" type="text" [disabled]="true" class="form-control" placeholder="Enter Age" [(ngModel)]="age" name="age">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Department <span class=text-danger>*</span></label>
+                  <select id="ddldepartment" class="form-control" formControlName="department">
+                    <option ngValue="" selected disabled hidden>Choose your department</option>
+                    <option *ngFor="let d of departments" [ngValue]="d" >
+                      {{d}}
+                    </option></select>
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Gender <span class=text-danger>*</span></label>
+                  <select formControlName="gender" class="form-control">
+                    <option ngValue="" selected disabled hidden>Choose your Gender</option>
+                    <option *ngFor="let g of genders" ngValue="g">
+                      {{g}}
+                    </option></select>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-3"></div>
+            <h6 class="text-light">Present address: </h6>
+            <div class="text-light"><hr color="#fffff"  style="padding-top: 1px; margin-top: -1px"></div>
+            
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Door No /House No /Apartement No <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="doorno" placeholder="Enter Door No /House No /Apartement No" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Road/Street/Lane Name <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="street" placeholder="Enter Road/Street/Lane Name" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>City <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="city" placeholder="Enter City" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>District <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="district" placeholder="Enter District" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Pincode <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="pincode" placeholder="Enter Pincode" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>State <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="state" placeholder="Enter State" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Country <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="country" [(ngModel)]="country" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-8 col-12">
+                <div class="form-group mt-4">
+                  <label class="me-3">Are the Permanent and Present Address same?</label>
+                  <input (click)="hi()" type="radio" id="yes" name="fav_language" value="yes">
+                    <label for="yes">Yes</label>
+                    <input (click)="bye()" type="radio" id="no" name="fav_language" value="no">
+                    <label for="no">No</label> 
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="pt-3"></div>
+            <h6 class="text-light">Permanent address: </h6>
+            <div class="text-light"><hr color="#fffff"  style="padding-top: 1px; margin-top: -1px"></div>
+            
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Door No /House No /Apartement No <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="pdoorno" [(ngModel)]="pdoorno" placeholder="Enter Door No /House No /Apartement No" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Road/Street/Lane Name <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="pstreet" [(ngModel)]="pstreet" placeholder="Enter Road/Street/Lane Name" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>City <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="pcity" [(ngModel)]="pcity" placeholder="Enter City" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>District <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="pdistrict" [(ngModel)]="pdistrict" placeholder="Enter District" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Pincode <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="ppincode" [(ngModel)]="ppincode" placeholder="Enter Pincode" class="form-control">
+                </div>
+              </div>
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>State <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="pstate" [(ngModel)]="pstate"  placeholder="Enter State" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 col-12">
+                <div class="form-group">
+                  <label>Country <span class=text-danger>*</span></label>
+                  <input type="text" formControlName="pcountry" [(ngModel)]="pcountry" placeholder="Enter Country" class="form-control">
+                </div>
+              </div>
+              
+            </div>
+
+            <div class="pt-3"></div>
+            <h6 class="text-light">Contact Details: </h6>
+            <div class="text-light"><hr color="#fffff"  style="padding-top: 1px; margin-top: -1px"></div>
+            
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label>EmailID <span class="text-danger">*</span></label>
+                  <input type="email" formControlName="email" class="form-control">
+                </div>
+
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="form-group">
+                  <label>PhoneNumber <span class="text-danger">*</span></label>
+                  <input type="text" formControlName="email" class="form-control">
+                </div>
+
+              </div>
+            </div>
+
+             
+            <div class="text-center pt-4">
+              <button type="submit" class="btn btn-primary raise btn-md">Submit</button>
+            </div>
+            <div class="pt-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+  <div class="pt-3"></div>
+  
+</form>
+
+ 
